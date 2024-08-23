@@ -35,7 +35,7 @@ $post_data['ship_name'] = "Store Test";
 $post_data['ship_add1'] = date('Y-m-d', strtotime("+250 days"));
 $post_data['ship_add2'] = $requestData['group_name'];
 $post_data['ship_city'] = $requestData['class_id'];
-$post_data['ship_state'] = "Dhaka";
+$post_data['ship_state'] = $requestData['student_photo_url'];
 $post_data['ship_postcode'] = "1000";
 $post_data['ship_phone'] = "";
 $post_data['ship_country'] = "Bangladesh";
@@ -46,6 +46,8 @@ $post_data["product_profile"] = "general";
 $post_data["product_name"] = "Computer";
 $post_data["num_of_item"] = "1";
 
+$post_data['value_a'] = $requestData['admission_no'];
+$post_data['value_b'] = $requestData['student_class'];
 # OPTIONAL PARAMETERS
 // $post_data['value_a'] = "Regent Air";
 // $post_data['value_b'] = "ref002";

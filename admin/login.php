@@ -1,19 +1,21 @@
-<?php session_start(); 
-include_once('includes/config.php');
+<?php 
+session_start(); 
+include_once('../db_connection.php');
 // Code for login 
 if(isset($_POST['login']))
 {
     $password=$_POST['password'];
     $dec_password=$password;
     $useremail=$_POST['uemail'];
-    $ret= mysqli_query($con,"SELECT id,fname FROM users WHERE email='$useremail' and password='$dec_password'");
+    $ret= mysqli_query($conn_integration,"SELECT id,fname FROM users WHERE email='$useremail' and password='$dec_password'");
     $num=mysqli_fetch_array($ret);
+    var_dump($num);
     if($num>0)
     {
 
     $_SESSION['id']=$num['id'];
     $_SESSION['name']=$num['fname'];
-    header("location:welcome.php");
+    header("location:dashboard.php");
 
     }
     else
@@ -23,53 +25,41 @@ if(isset($_POST['login']))
 }
 ?>
 
-<?php include_once('includes/header.php');?>
+<?php include_once("./common/login-header.php"); ?>
 
-    <div id="layoutAuthentication">
-        <div id="layoutAuthentication_content">
-            <main>
-                <div class="container">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-5">
-                            <div class="card shadow-lg border-0 rounded-lg mt-5">
-
-                                <div class="card-header">
-                                    <h2 align="center">Subscription Login</h2>
-                                </div>
-                                <div class="card-body">
-
-                                    <form method="post">
-
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" name="uemail" type="email"
-                                                placeholder="name@example.com" required />
-                                            <label for="inputEmail">Email address</label>
-                                        </div>
-
-
-                                        <div class="form-floating mb-3">
-                                            <input class="form-control" name="password" type="password"
-                                                placeholder="Password" required />
-                                            <label for="inputPassword">Password</label>
-                                        </div>
-
-
-                                        <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
-                                            <a class="small" href="password-recovery.php">Forgot Password?</a>
-                                            <button class="btn btn-primary" name="login" type="submit">Login</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <!-- <div class="card-footer text-center py-3">
-                                    <div class="small"><a href="signup.php">Need an account? Sign up!</a></div>
-                                    <div class="small"><a href="index.php">Back to Home</a></div>
-                                </div> -->
-                            </div>
+        <!-- Sign In Start -->
+        <div class="container-fluid">
+            <div class="row h-100 align-items-center justify-content-center" style="min-height: 100vh;">
+                <div class="col-12 col-sm-8 col-md-6 col-lg-5 col-xl-4">
+                    <div class="bg-secondary rounded p-4 p-sm-5 my-4 mx-3">
+                    <form method="post">
+                        <div class="d-flex align-items-center justify-content-between mb-3">
+                           
+                           <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Subscription</h3>
+                            
+                            <h3>Sign In</h3>
                         </div>
+                        <div class="form-floating mb-3">
+                            <input class="form-control" name="uemail" type="email" placeholder="name@example.com" required />
+                            <label for="floatingInput">Email address</label>
+                        </div>
+                        <div class="form-floating mb-4">
+                            <input class="form-control" name="password" type="password" placeholder="Password" required />
+                            <label for="floatingPassword">Password</label>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                            </div>
+                            <!-- <a href="">Forgot Password</a> -->
+                        </div>
+                        <button name="login"  class="btn btn-primary py-3 w-100 mb-4">Sign In</button>
+                        <!-- <p class="text-center mb-0">Don't have an Account? <a href="">Sign Up</a></p> -->
                     </div>
+                </form>
                 </div>
-            </main>
+            </div>
         </div>
-       
-    </div>
-     <?php include('includes/footer.php');?>
+
+<?php include_once("./common/footer.php"); ?>

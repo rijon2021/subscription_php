@@ -1,5 +1,6 @@
 
 <?php
+
 error_reporting(0);
 
 if($_GET['url_adm_no']){
@@ -63,8 +64,10 @@ if(isset($_POST['search']))
                                     </td>
                                     <td colspan="3" style="text-align: center;">
                                       <div id="ForLeftSideMenuList_divImage">
-                                        <div style="width: 100px;height:100px;background: #ededed;padding: 4px;border: 1px solid #000;margin:auto"><img id="lblStudentPhoto" class="img-responsive" style="width:auto;height:100%;"
-                                          src="<?php echo $user_data->ImageName ?>" alt="..."></div>
+                                        <div style="width: 100px;height:100px;background: #ededed;padding: 4px;border: 1px solid #000;margin:auto">
+                                            <img id="lblStudentPhotoImg" class="img-responsive" style="width:auto;height:100%;" src="<?php echo $user_data->ImageName ?>" alt="Student Photo">
+                                            <span style="display:none" id="lblStudentPhoto"><?php echo $user_data->ImageName ?></span>
+                                          </div>
                                       </div>
                                     </td>
                                   </tr>
@@ -154,11 +157,11 @@ if(isset($_POST['search']))
                         <label class="custom-control-label" for="save-info">I agree with <a href="javascript:void(0)">Terms and Condition</a></label>
                     </div>
                  <?php if ((!empty($user_data)) && (isset($_POST['search']))){ ?>
-                    <button class="btn btn-primary btn-lg btn-block" id="sslczPayBtn" 
+                    <button class="btn btn-outline-info btn-lg btn-block" id="sslczPayBtn" 
                             token="if you have any token validation"
                             postdata="your javascript arrays or objects which requires in backend"
                             order="If you already have the transaction generated for current order"
-                            endpoint="checkout_ajax.php"> Pay Now
+                            endpoint="checkout_ajax.php"> Payment By <img src="https://islampurcollege.edu.bd/Images/ssl-icon.png"> 
                     </button>
                     <?php } ?>
             </div>
@@ -190,6 +193,7 @@ if(isset($_POST['search']))
                 obj.student_class = document.getElementById("lblClassName").innerHTML;
                 obj.fathers_name = document.getElementById("lblFathersName").innerHTML;
                 obj.student_name = document.getElementById('lblStudentName').innerHTML;
+                obj.student_photo_url = document.getElementById('lblStudentPhoto').innerHTML;
                 obj.admission_no = document.getElementById('lblAdmissionNo').innerHTML;
                 obj.admission_year = document.getElementById('lblAdmissionYear').innerHTML;
                 obj.group_name = document.getElementById('lblGroupName').innerHTML;
