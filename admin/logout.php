@@ -1,9 +1,9 @@
 <?php
-echo 'fdsfds';
+include_once('../db_connection.php');
 session_start();
 session_destroy();
-header("location:''");
+// header("location: $adminURL.'/login.php'");
 ?>
-<!-- <script language="javascript">
-document.location="../admin/login.php";
-</script> -->
+<script language="javascript">
+document.location="<?php echo $adminURL?>/login.php";
+</script>

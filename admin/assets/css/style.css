@@ -2,7 +2,7 @@
 :root {
     --primary: #EB1616;
     --secondary: #191C24;
-    --light: #6C7293;
+    --light: #ffffff;
     --dark: #000000;
 }
 
@@ -60,7 +60,9 @@
     font-weight: normal;
     border-radius: 50px;
 }
-
+table{
+    color: #fff!important;
+}
 
 /*** Layout ***/
 .sidebar {
@@ -286,4 +288,9 @@
 .testimonial-carousel .owl-dot.active {
     background: var(--dark);
     border-color: var(--primary);
+}
+
+.table-height{
+    height: 50vh;
+    overflow-y: auto;
 }

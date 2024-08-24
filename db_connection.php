@@ -1,5 +1,5 @@
 <?php
- $adminURL='http://subscription_php.oo/admin'
+ $adminURL='http://subscription_php.oo/admin';
 // if($_SERVER=='http://127.0.0.1'){
     $servername = "localhost";
     $username = "root"; // Put the MySQL Username

@@ -1,14 +1,15 @@
-
 <?php
-
-    error_reporting(0);
-
+ session_start();
+include_once('../db_connection.php');
+if (strlen($_SESSION['id']==0)) {
+  header('location:logout.php');
+  } else{
 ?>
 <?php include("./common/header.php"); ?>
-
+<?php include("./common/sidebar.php"); ?>
         <!-- Content Start -->
         <div class="content">
-            
+        
             <?php include("./common/topbar.php"); ?>
 
             <!-- Form Start -->
@@ -18,58 +19,49 @@
                     <div class="col-sm-12 col-xl-12">
                         <div class="bg-secondary rounded h-100 p-4">
                             <h6 class="mb-4">Search Payments</h6>
-                            <form>
+                            <form method="POST" >
                                 <div class="row">
-                                    <div class="col-md-4">
+                                    <div class="col-md-5">
                                         <div class="row mb-1">
                                             <label for="Batch" class="col-sm-3 col-form-label">Batch</label>
                                             <div class="col-sm-9">
-                                                <select id="Batch" class="form-select mb-3"
-                                                    aria-label="Default select example">
-                                                    <option selected>Select Batch</option>
-                                                    <option value="1">Eleven2021</option>
-                                                    <option value="1">Eleven2022</option>
-                                                    <option value="1">Eleven2023</option>
+                                                <select name="class_id" class="form-select" >
+                                                    <option selected="selected" value="0">All</option>
+                                                    <option value="221">Eleven</option>
+                                                    <option value="222">Twelve</option>
+                                                    <option value="223">ElevenBMT</option>
+                                                    <option value="224">TwelveBMT</option>
+                                                    <option value="226">DegreeFirstYear</option>
+                                                    <option value="227">HonoursFirstYear</option>
+                                                    <option value="228">MastersFinal</option>
+                                                    <option value="229">DegreeSecondYear</option>
+                                                    <option value="230">PreliminaryToMasters</option>
+                                                    <option value="231">DegreeThirdYear</option>
+                                                    <option value="232">HonoursSecondYear</option>
+                                                    <option value="233">HonoursThirdYear</option>
+                                                    <option value="234">test1</option>
+                                            
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-5">
                                         <div class="row mb-1">
-                                            <label for="fromDate" class="col-sm-3 col-form-label">From Date</label>
+                                            <label for="fromDate" class="col-sm-3 col-form-label">Status</label>
                                             <div class="col-sm-9">
-                                                <input type="date" class="form-control" id="fromDate">
+                                                <select name="status" class="form-select" >
+                                                    <option selected="selected" value="0">All</option>
+                                                    <option value="'success'">Success</option>
+                                                    <option value="'Pending'">Pending</option>
+                                            
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="row mb-1">
-                                            <label for="toDate" class="col-sm-3 col-form-label">To Date</label>
-                                            <div class="col-sm-9">
-                                                <input type="date" class="form-control" id="toDate">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="row mb-1">
-                                            <label for="Txn" class="col-sm-3 col-form-label">Txn Id</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="Txn">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="row mb-1">
-                                            <label for="Reg" class="col-sm-3 col-form-label">SSC Reg</label>
-                                            <div class="col-sm-9">
-                                                <input type="text" class="form-control" id="Reg">
-                                            </div>
-                                        </div>
-                                    </div>
-                                   
-                                    <div class="col-md-4">
+                                                                      
+                                    <div class="col-md-2">
                                         <div class="text-end">
-                                            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
+                                            <button type="submit" name="search" class="btn btn-primary"><i class="fa fa-search"></i> Search</button>
                                         </div>
                                     </div>
                                 </div>
@@ -83,47 +75,56 @@
                             <h6 class="mb-4">Payment List</h6>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="table-responsive">
+                                    <div class="table-responsive table-height">
                                         <table class="table">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">#</th>
-                                                    <th scope="col">Batch</th>
-                                                    <th scope="col">Student Name</th>
-                                                    <th scope="col">SSC Roll</th>
-                                                    <th scope="col">SSC Registration</th>
-                                                    <th scope="col">Mobile</th>
-                                                    <th scope="col">Amount</th>
-                                                    <th scope="col">Charge</th>
-                                                    <th scope="col">Txn Id</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col">Action</th>
+                                                    <th>SN  </th>
+                                                    <th>Admission No</th>
+                                                    <th>Student Name</th>
+                                                    <th>father name</th>
+                                                    <th>class name</th>
+                                                    <th>group name</th>
+                                                    <th>student phone</th>
+                                                    <th>total amount</th>
+                                                    <th>status</th>
+                                                    <th>transaction id</th>
+                                                    <th>Create date</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
+                                            <?php 
+                                             if(isset($_POST['search']))
+                                                {
+                                                    $class_id=$_POST['class_id'];
+                                                    $status=$_POST['status'];
+                                                }
+                                                $count = 1;
+                                                $query=mysqli_query($conn_integration,"select * from orders where class_id=$class_id and status=$status");
+                                                while($result=mysqli_fetch_array($query))
+                                        
+                                                {
+                                            ?>
                                                 <tr>
-                                                    <th scope="row">1</th>
-                                                    <td>Eleven2021</td>
-                                                    <td>Rajib Mahmud</td>
-                                                    <td>105489</td>
-                                                    <td>105254789</td>
-                                                    <td>01755669988</td>
-                                                    <td>60</td>
-                                                    <td>10</td>
-                                                    <td>batchID+auto gen id</td>
-                                                    <td><span class="text-success">Success</span></td>
-                                                    <td><a href=""><i class="fa fa-eye"></i></a></td>
-                                                   
+                                                    <td><?php echo $count; ?></td>
+                                                    <td><?php echo $result['admission_no'];?></td>
+                                                    <td><?php echo $result['student_name'];?></td>
+                                                    <td><?php echo $result['father_name'];?></td>
+                                                    <td><?php echo $result['class_id'];?></td>
+                                                    <td><?php echo $result['class_name'];?></td>
+                                                    <td><?php echo $result['group_name'];?></td>
+                                                    <td><?php echo $result['student_phone'];?></td>
+                                                    <td><?php echo $result['total_amount'];?></td>
+                                                    <td><?php echo $result['status'];?></td>
+                                                    <td><?php echo $result['transaction_id'];?></td>
+                                                    <td><?php echo $result['create_date'];?></td>
                                                 </tr>
+                                            <?php
+                                                $count ++;
+                                                } 
+                                            ?>
                                             </tbody>
-                                            <tfoot>
-                                                <th colspan="6"></th>
-                                                <th>600</th>
-                                                <th>100</th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
-                                            </tfoot>
+                                            
                                         </table>
                                     </div>
                                 </div>
@@ -156,4 +157,5 @@
         </div>
         <!-- Content End -->
 
+<?php } ?>
 <?php include("./common/footer.php"); ?>
