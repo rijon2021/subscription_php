@@ -76,19 +76,19 @@ if (strlen($_SESSION['id']==0)) {
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="table-responsive table-height">
-                                        <table class="table">
+                                        <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
                                                     <th>SN  </th>
                                                     <th>Admission No</th>
                                                     <th>Student Name</th>
-                                                    <th>father name</th>
-                                                    <th>class name</th>
-                                                    <th>group name</th>
-                                                    <th>student phone</th>
-                                                    <th>total amount</th>
-                                                    <th>status</th>
-                                                    <th>transaction id</th>
+                                                    <th>Father Name</th>
+                                                    <th>Class Name</th>
+                                                    <th>Group Name</th>
+                                                    <th>Student Phone</th>
+                                                    <th>Total Amount</th>
+                                                    <th>Status</th>
+                                                    <th>Transaction Id</th>
                                                     <th>Create date</th>
                                                 </tr>
                                             </thead>
@@ -98,10 +98,14 @@ if (strlen($_SESSION['id']==0)) {
                                                 {
                                                     $class_id=$_POST['class_id'];
                                                     $status=$_POST['status'];
+                                                    
+                                                   
+                                                    $query="select * from orders where class_id=$class_id and status=$status";
+                                                    $query_result=mysqli_query($conn_integration, $query);
                                                 }
+                                            if($query_result){
                                                 $count = 1;
-                                                $query=mysqli_query($conn_integration,"select * from orders where class_id=$class_id and status=$status");
-                                                while($result=mysqli_fetch_array($query))
+                                                while($result=mysqli_fetch_array($query_result))
                                         
                                                 {
                                             ?>
@@ -110,7 +114,6 @@ if (strlen($_SESSION['id']==0)) {
                                                     <td><?php echo $result['admission_no'];?></td>
                                                     <td><?php echo $result['student_name'];?></td>
                                                     <td><?php echo $result['father_name'];?></td>
-                                                    <td><?php echo $result['class_id'];?></td>
                                                     <td><?php echo $result['class_name'];?></td>
                                                     <td><?php echo $result['group_name'];?></td>
                                                     <td><?php echo $result['student_phone'];?></td>
@@ -121,7 +124,7 @@ if (strlen($_SESSION['id']==0)) {
                                                 </tr>
                                             <?php
                                                 $count ++;
-                                                } 
+                                                } }
                                             ?>
                                             </tbody>
                                             

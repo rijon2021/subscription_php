@@ -20,8 +20,8 @@ if (strlen($_SESSION['id']==0)) {
                         <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-line fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Today Sale</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <p class="mb-2">Total Payment</p>
+                                <h6 class="mb-0">315</h6>
                             </div>
                         </div>
                     </div>
@@ -29,8 +29,8 @@ if (strlen($_SESSION['id']==0)) {
                         <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-bar fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Total Sale</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <p class="mb-2">Today Payment</p>
+                                <h6 class="mb-0">100</h6>
                             </div>
                         </div>
                     </div>
@@ -38,8 +38,8 @@ if (strlen($_SESSION['id']==0)) {
                         <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-area fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Today Revenue</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <p class="mb-2">Total Amount</p>
+                                <h6 class="mb-0">50000 Tk</h6>
                             </div>
                         </div>
                     </div>
@@ -47,8 +47,8 @@ if (strlen($_SESSION['id']==0)) {
                         <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
                             <i class="fa fa-chart-pie fa-3x text-primary"></i>
                             <div class="ms-3">
-                                <p class="mb-2">Total Revenue</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <p class="mb-2">Today Amount</p>
+                                <h6 class="mb-0">5000 Tk</h6>
                             </div>
                         </div>
                     </div>

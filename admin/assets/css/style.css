@@ -63,7 +63,9 @@
 table{
     color: #fff!important;
 }
-
+.table thead tr th{
+    background-color: #1d2453;
+}
 /*** Layout ***/
 .sidebar {
     position: fixed;

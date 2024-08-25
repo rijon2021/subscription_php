@@ -1,6 +1,10 @@
 <?php 
 session_start(); 
 include_once('../db_connection.php');
+if (strlen($_SESSION['id']>0)) {
+    header('location:dashboard.php');
+}else{
+ 
 // Code for login 
 if(isset($_POST['login']))
 {
@@ -62,4 +66,7 @@ if(isset($_POST['login']))
             </div>
         </div>
 
-<?php include_once("./common/footer.php"); ?>
+<?php
+    }
+    include_once("./common/footer.php");
+  ?>
